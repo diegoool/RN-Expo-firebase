@@ -64,16 +64,23 @@ export default class Login extends Component{
                 if (errorCode === 'auth/wrong-password'){
                     Alert.alert(
                         'Password Incorrecto',
-                        'Reemplazar por un Toast',
                         [
                           {text: 'OK', onPress: () => console.log('OK Pressed')},
                         ],
                         { cancelable: false }
                     )   
+                } else if (errorCode === 'auth/email-already-in-use'){
+                    Alert.alert(
+                        'Una cuenta con este email ya esta registrada.',
+                        [
+                            {text: 'OK', onPress: () => console.log('OK Pressed')},
+                        ],
+                        { cancelable: false }
+                    )   
+
                 } else {
                     Alert.alert(
                         errorMessage,
-                        'Reemplazar por un Toast',
                         [
                             {text: 'OK', onPress: () => console.log('OK Pressed')},
                         ],

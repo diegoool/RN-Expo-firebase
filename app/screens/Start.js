@@ -11,7 +11,7 @@ import facebook from '../utils/fb';
 export default class Start extends Component  {
 
     static navigationOptions ={
-        title: 'Expo App'
+        title: 'Woo App'
     }
 
     login(){
@@ -41,68 +41,35 @@ export default class Start extends Component  {
 			const credentials = firebase.auth.FacebookAuthProvider.credential(token);
 			firebase.auth().signInAndRetrieveDataWithCredential(credentials)
 				.catch(error => {
-					console.log(error)
-					// Toast.showWithGravity('Error accediendo con facebook', Toast.LONG, Toast.BOTTOM);
+					Alert.alert(
+                        'Error accediendo con facebook',
+                        [
+                            {text: 'OK', onPress: () => console.log('OK Pressed')},
+                        ],
+                        { cancelable: false }
+                    )   
 				})
             } else if(type === "cancel") {
-                console.log('cancel')
-                // Toast.showWithGravity('Inicio de sesón cancelado', Toast.LONG, Toast.BOTTOM);
+                Alert.alert(
+                    'Inicio de sesion cancelado',
+                    'Reemplazar por un Toast',
+                    [
+                        {text: 'OK', onPress: () => console.log('OK Pressed')},
+                    ],
+                    { cancelable: false }
+                )   
             } else {
-                console.log('desconocido')
-			// Toast.showWithGravity('Error desconocido', Toast.LONG, Toast.BOTTOM);
+                Alert.alert(
+                    'Error desconocido',
+                    'Reemplazar por un Toast',
+                    [
+                        {text: 'OK', onPress: () => console.log('OK Pressed')},
+                    ],
+                    { cancelable: false }
+                )   
 		}
 	}
-
-    // async facebook(){
-    //     const {type, token} = await Expo.Facebook.logInWithReadPermissionsAssync(
-    //         facebookConfig.config.application_id,
-    //         { permissions: facebookConfig.config.permissions }
-    //     )
-
-    //     if(type === 'success'){
-    //         const credentials = firebase.auth.FacebookAuthProvider.credential(token);
-    //         firebase.auth().signInWithCredential(credentials)
-    //         .catch((error)=>{
-
-    //             Alert.alert(
-    //                 'Error accediendo con Facebook',
-    //                 'Reemplazar por un Toast',
-    //                 [
-    //                     {text: 'OK', onPress: () => console.log('OK Pressed')},
-    //                 ],
-    //                 { cancelable: false }
-    //             )   
-
-    //         })
-        
-    //     } else if (type === 'cancel'){
-
-    //         Alert.alert(
-    //             'Inicio de sesion cancelado',
-    //             'Reemplazar por un Toast',
-    //             [
-    //                 {text: 'OK', onPress: () => console.log('OK Pressed')},
-    //             ],
-    //             { cancelable: false }
-    //         )   
-
-    //     } else {
-
-    //         Alert.alert(
-    //             'Error desconocido',
-    //             'Reemplazar por un Toast',
-    //             [
-    //                 {text: 'OK', onPress: () => console.log('OK Pressed')},
-    //             ],
-    //             { cancelable: false }
-    //         )   
-
-    //     }
-    // }
   
-    async google(){
-
-    }
     
     render(){
         return(
@@ -129,14 +96,6 @@ export default class Start extends Component  {
                     title='Facebook'
                     action={this.facebook.bind(this)}
                     iconName='facebook'
-                    iconSize={30}
-                    iconColor='white'
-                />
-                <AppButton
-                    bgColor='rgba(255, 89, 90, 0.7)'
-                    title='Google'
-                    action={this.google.bind(this)}
-                    iconName='google'
                     iconSize={30}
                     iconColor='white'
                 />
