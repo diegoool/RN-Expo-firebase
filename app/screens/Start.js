@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
-import {View} from 'react-native';
+import {View, Alert} from 'react-native';
 import BackgroundImg from '../components/BackgroundImg';
 import AppButton from '../components/AppButton';
 import { NavigationActions } from 'react-navigation';
 // import Toast from 'react-native-simple-toast';
 import * as firebase from 'firebase';
+
+import facebook from '../utils/fb';
 
 export default class Start extends Component  {
 
@@ -28,9 +30,75 @@ export default class Start extends Component  {
 
     }
     
-    async facebook(){
 
-    }
+    async facebook () {
+		const {type, token} = await Expo.Facebook.logInWithReadPermissionsAsync(
+			facebook.config.application_id,
+			{ permissions: facebook.config.permissions }
+		);
+
+		if(type === "success") {
+			const credentials = firebase.auth.FacebookAuthProvider.credential(token);
+			firebase.auth().signInAndRetrieveDataWithCredential(credentials)
+				.catch(error => {
+					console.log(error)
+					// Toast.showWithGravity('Error accediendo con facebook', Toast.LONG, Toast.BOTTOM);
+				})
+            } else if(type === "cancel") {
+                console.log('cancel')
+                // Toast.showWithGravity('Inicio de sesón cancelado', Toast.LONG, Toast.BOTTOM);
+            } else {
+                console.log('desconocido')
+			// Toast.showWithGravity('Error desconocido', Toast.LONG, Toast.BOTTOM);
+		}
+	}
+
+    // async facebook(){
+    //     const {type, token} = await Expo.Facebook.logInWithReadPermissionsAssync(
+    //         facebookConfig.config.application_id,
+    //         { permissions: facebookConfig.config.permissions }
+    //     )
+
+    //     if(type === 'success'){
+    //         const credentials = firebase.auth.FacebookAuthProvider.credential(token);
+    //         firebase.auth().signInWithCredential(credentials)
+    //         .catch((error)=>{
+
+    //             Alert.alert(
+    //                 'Error accediendo con Facebook',
+    //                 'Reemplazar por un Toast',
+    //                 [
+    //                     {text: 'OK', onPress: () => console.log('OK Pressed')},
+    //                 ],
+    //                 { cancelable: false }
+    //             )   
+
+    //         })
+        
+    //     } else if (type === 'cancel'){
+
+    //         Alert.alert(
+    //             'Inicio de sesion cancelado',
+    //             'Reemplazar por un Toast',
+    //             [
+    //                 {text: 'OK', onPress: () => console.log('OK Pressed')},
+    //             ],
+    //             { cancelable: false }
+    //         )   
+
+    //     } else {
+
+    //         Alert.alert(
+    //             'Error desconocido',
+    //             'Reemplazar por un Toast',
+    //             [
+    //                 {text: 'OK', onPress: () => console.log('OK Pressed')},
+    //             ],
+    //             { cancelable: false }
+    //         )   
+
+    //     }
+    // }
   
     async google(){
 

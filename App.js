@@ -20,6 +20,10 @@ export default class App extends React.Component {
       loaded: false
     }
   }
+  
+  // componentDidMount(){
+  //   firebase.auth().signOut()
+  // }
 
   async componentDidMount (){
     await firebase.auth().onAuthStateChanged((user) => {
