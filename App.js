@@ -1,29 +1,56 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import AppButton from './app/components/AppButton';
+import {Text} from 'react-native';
+import GuestNavigation from './app/navigations/guest';
+
+import PreLoader from './app/components/PreLoader';
+
+// Firebase
+import firebaseConfig from './app/utils/firebase';
+import * as firebase from 'firebase';
+
+firebase.initializeApp(firebaseConfig)
 
 export default class App extends React.Component {
+
+  constructor(){
+    super();
+
+    this.state = {
+      isLogged: false,
+      loaded: false
+    }
+  }
+
+  async componentDidMount (){
+    await firebase.auth().onAuthStateChanged((user) => {
+      if(user !== null) {
+        this.setState({
+          isLogged: true,
+          loaded: true
+        });
+      } else {
+          this.setState({
+            isLogged: false,
+            loaded: true
+          });
+
+      }
+    })
+  }
+
   render() {
-    return (
-      <View style={styles.container}>
-        <AppButton
-        bgColor='gray'
-        title='Test'
-        action={()=> console.log(1)}
-        iconName='sign-in'
-        iconSize={30}
-        iconColor='#fff'
-        />
-      </View>
-    );
+        const {isLogged, loaded} = this.state;
+        
+        if(!loaded){
+          return ( <PreLoader /> );
+        }
+        
+        if(isLogged){
+          return ( <Text>Logueado</Text> );
+        } else {
+          return( <GuestNavigation /> );
+        }
+
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
