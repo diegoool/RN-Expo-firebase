@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Alert} from 'react-native';
+import {View} from 'react-native';
 import BackgroundImg from '../components/BackgroundImg';
 import AppButton from '../components/AppButton';
 import { NavigationActions } from 'react-navigation';

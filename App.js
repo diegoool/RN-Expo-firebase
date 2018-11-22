@@ -7,6 +7,7 @@ import PreLoader from './app/components/PreLoader';
 // Firebase
 import firebaseConfig from './app/utils/firebase';
 import * as firebase from 'firebase';
+import NoEvents from './app/components/Events/NoEvents';
 
 firebase.initializeApp(firebaseConfig)
 
@@ -50,7 +51,7 @@ export default class App extends React.Component {
         }
         
         if(isLogged){
-          return ( <Text>Logueado</Text> );
+          return ( <NoEvents text="No hay eventos"/> );
         } else {
           return( <GuestNavigation /> );
         }
