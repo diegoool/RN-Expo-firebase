@@ -9,7 +9,7 @@ import * as firebase from 'firebase';
 
 const Form = t.form.Form;
 
-import Toast from 'react-native-root-toast';
+import Toast from 'react-native-easy-toast';
 
 export default class Login extends Component{
 
@@ -47,46 +47,18 @@ export default class Login extends Component{
         if (validate) {
             firebase.auth().signInWithEmailAndPassword(validate.email, validate.password)
             .then(()=>{
-                Alert.alert(
-                    'Welcome!',
-                    'Reemplazar por un Toast',
-                    [
-                      {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-                      {text: 'OK', onPress: () => console.log('OK Pressed')},
-                    ],
-                    { cancelable: false }
-                )   
+                this.refs.toast.show('Welcome!', 800);
             })
             .catch((error)=> {
                 const errorCode = error.code;
                 const errorMessage = error.message;
 
                 if (errorCode === 'auth/wrong-password'){
-                    Alert.alert(
-                        'Password Incorrecto',
-                        [
-                          {text: 'OK', onPress: () => console.log('OK Pressed')},
-                        ],
-                        { cancelable: false }
-                    )   
+                    this.refs.toast.show('Incorrect Password', 800);
                 } else if (errorCode === 'auth/email-already-in-use'){
-                    Alert.alert(
-                        'Una cuenta con este email ya esta registrada.',
-                        [
-                            {text: 'OK', onPress: () => console.log('OK Pressed')},
-                        ],
-                        { cancelable: false }
-                    )   
-
+                    this.refs.toast.show('This email is already registered.', 800);
                 } else {
-                    Alert.alert(
-                        errorMessage,
-                        [
-                            {text: 'OK', onPress: () => console.log('OK Pressed')},
-                        ],
-                        { cancelable: false }
-                    )   
-
+                    this.refs.toast.show(errorMessage, 800);
                 }
             })
         }
@@ -96,7 +68,7 @@ export default class Login extends Component{
     render (){
 
         return(
-            <BackgroundImg source={require('../../assets/images/img1.png')} >
+            <BackgroundImg source={require('../../assets/images/img1.png')}>
             <View>
                 <Card wrapperStyle={{paddingLeft: 10, paddingRight: 10}} title="Iniciar Sesion" >
                     <Form
@@ -114,6 +86,15 @@ export default class Login extends Component{
                 />
                 </Card>
             </View>
+            <Toast
+                ref="toast"
+                style={{backgroundColor:'red', padding:10}}
+                position='top'
+                fadeInDuration={750}
+                fadeOutDuration={1000}
+                opacity={0.8}
+                textStyle={{color:'white'}}
+            />
             </BackgroundImg>
         )
     }

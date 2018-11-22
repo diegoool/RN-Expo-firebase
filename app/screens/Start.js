@@ -3,7 +3,7 @@ import {View, Alert} from 'react-native';
 import BackgroundImg from '../components/BackgroundImg';
 import AppButton from '../components/AppButton';
 import { NavigationActions } from 'react-navigation';
-// import Toast from 'react-native-simple-toast';
+import Toast from 'react-native-easy-toast';
 import * as firebase from 'firebase';
 
 import facebook from '../utils/fb';
@@ -41,32 +41,12 @@ export default class Start extends Component  {
 			const credentials = firebase.auth.FacebookAuthProvider.credential(token);
 			firebase.auth().signInAndRetrieveDataWithCredential(credentials)
 				.catch(error => {
-					Alert.alert(
-                        'Error accediendo con facebook',
-                        [
-                            {text: 'OK', onPress: () => console.log('OK Pressed')},
-                        ],
-                        { cancelable: false }
-                    )   
+                    this.refs.toast.show('Login error facebook', 800);
 				})
             } else if(type === "cancel") {
-                Alert.alert(
-                    'Inicio de sesion cancelado',
-                    'Reemplazar por un Toast',
-                    [
-                        {text: 'OK', onPress: () => console.log('OK Pressed')},
-                    ],
-                    { cancelable: false }
-                )   
+                this.refs.toast.show('Login canceled', 800);
             } else {
-                Alert.alert(
-                    'Error desconocido',
-                    'Reemplazar por un Toast',
-                    [
-                        {text: 'OK', onPress: () => console.log('OK Pressed')},
-                    ],
-                    { cancelable: false }
-                )   
+                this.refs.toast.show('Unknown error', 800);
 		}
 	}
   
@@ -100,6 +80,15 @@ export default class Start extends Component  {
                     iconColor='white'
                 />
             </View>
+            <Toast
+                ref="toast"
+                style={{backgroundColor:'red', padding:10}}
+                position='top'
+                fadeInDuration={750}
+                fadeOutDuration={1000}
+                opacity={0.8}
+                textStyle={{color:'white'}}
+            />
         </BackgroundImg>
         )
     }

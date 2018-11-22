@@ -5,6 +5,7 @@ import AppButton from '../components/AppButton';
 import t from 'tcomb-form-native';
 import formValidation from '../utils/validation';
 import {Card} from 'react-native-elements';
+import Toast from 'react-native-easy-toast';
 import * as firebase from 'firebase';
 
 const Form = t.form.Form;
@@ -62,27 +63,17 @@ export default class Register extends Component {
                 this.validate.password
             )
             .then(()=>{
-                Alert.alert(
-                    'Welcome!',
-                    'Reemplazar por un Toast',
-                    [
-                      {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-                      {text: 'OK', onPress: () => console.log('OK Pressed')},
-                    ],
-                    { cancelable: false }
-                )                
+                this.refs.toast.show('Welcome', 800);            
             })
             .catch((error)=>{
+                const errorCode = error.code;
                 const errorMessage = error.message;
 
-                Alert.alert(
-                    errorMessage,
-                    'Reemplazar por un Toast',
-                    [
-                        {text: 'OK', onPress: () => console.log('OK Pressed')},
-                    ],
-                    { cancelable: false }
-                )   
+                if (errorCode === 'auth/email-already-in-use'){
+                    this.refs.toast.show('This email is already registered.', 800);
+                } else {
+                    this.refs.toast.show(errorMessage, 800);  
+                }     
 
             })
         }
@@ -115,6 +106,15 @@ export default class Register extends Component {
                 />
                 </Card>
             </View>
+            <Toast
+                ref="toast"
+                style={{backgroundColor:'red', padding:10}}
+                position='top'
+                fadeInDuration={750}
+                fadeOutDuration={1000}
+                opacity={0.8}
+                textStyle={{color:'white'}}
+            />
         </BackgroundImg>
     )
   }
