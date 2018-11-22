@@ -24,7 +24,7 @@ export default class Events extends Component {
     componentDidMount(){
         this.refEvents.on('value', snapshot => {
             let events = [];
-            snapshot.foreach(row => {
+            snapshot.forEach(row => {
                 events.push({
                     id: row.key,
                     name: row.val().name,

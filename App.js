@@ -1,15 +1,14 @@
 import React from 'react';
-import {Text} from 'react-native';
-import GuestNavigation from './app/navigations/guest';
-
 import PreLoader from './app/components/PreLoader';
-
 // Firebase
 import firebaseConfig from './app/utils/firebase';
 import * as firebase from 'firebase';
-import NoEvents from './app/components/Events/NoEvents';
-
 firebase.initializeApp(firebaseConfig)
+
+import GuestNavigation from './app/navigations/guest';
+import LoggedNavigation from './app/navigations/logged';
+
+console.disableYellowBox = true;
 
 export default class App extends React.Component {
 
@@ -21,10 +20,6 @@ export default class App extends React.Component {
       loaded: false
     }
   }
-  
-  // componentDidMount(){
-  //   firebase.auth().signOut()
-  // }
 
   async componentDidMount (){
     await firebase.auth().onAuthStateChanged((user) => {
@@ -51,7 +46,7 @@ export default class App extends React.Component {
         }
         
         if(isLogged){
-          return ( <NoEvents text="No hay eventos"/> );
+          return ( <LoggedNavigation /> );
         } else {
           return( <GuestNavigation /> );
         }

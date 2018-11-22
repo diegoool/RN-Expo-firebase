@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View } from 'react-native'
-import AppButton from 'react-native'
+import AppButton from "../AppButton";
+import { StyleSheet, View } from 'react-native'
 
 export default class EventAddButton extends Component {
   render() {

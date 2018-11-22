@@ -86,7 +86,7 @@ export default class Register extends Component {
 
   render() {
     return (
-        <BackgroundImg source={require('../../assets/images/img3.png')} >
+        <BackgroundImg  source={require('../../assets/images/img3.png')} >
             <View>
             <Card wrapperStyle={{paddingLeft: 10, paddingRight: 10}} title="Registrate" >
                     <Form
