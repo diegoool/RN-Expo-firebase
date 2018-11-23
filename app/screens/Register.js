@@ -103,7 +103,7 @@ export default class Register extends Component {
                     iconName='user-plus'
                     iconSize={30}
                     iconColor='white'            
-                />
+                    />
                 </Card>
             </View>
             <Toast

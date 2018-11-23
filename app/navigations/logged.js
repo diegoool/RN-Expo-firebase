@@ -1,5 +1,6 @@
 import React from 'react'
 import EventsScreen from '../screens/Events/Events'
+import AddEventScreen from '../screens/Events/AddEvent'
 import LogoutScreen from '../screens/Logout'
 
 import {DrawerNavigator, StackNavigator} from 'react-navigation'
@@ -30,8 +31,8 @@ const leftIcon = (navigation, icon) => <Icon
 
     const rightIcon = (navigation, icon) => <Icon
         name={icon}
-        style={{marginLeft: 20}}
-        size={30}
+        style={{marginRight: 20}}
+        size={25}
         color='white'
         onPress={() => navigation.navigate('ListEvents')}
     />
@@ -43,6 +44,14 @@ const eventsScreenStack = StackNavigator(
             navigationOptions: ({navigation}) => ({
                 title: 'Events',
                 drawerIcon: ({tintColor}) => (<Icon name='home' size={24} style={{ color: tintColor}} />),
+                headerLeft: leftIcon(navigation, 'bars')
+            })
+        },
+        AddEvent: {
+            screen: AddEventScreen,
+            navigationOptions: ({navigation}) => ({
+                title: 'Add Event',
+                headerRight: rightIcon(navigation, 'home'),
                 headerLeft: leftIcon(navigation, 'bars')
             })
         }
