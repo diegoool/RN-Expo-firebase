@@ -1,6 +1,7 @@
 import React from 'react'
 import EventsScreen from '../screens/Events/Events'
 import AddEventScreen from '../screens/Events/AddEvent'
+import DetailEventScreen from '../screens/Events/DetailEvent'
 import LogoutScreen from '../screens/Logout'
 
 import {DrawerNavigator, StackNavigator} from 'react-navigation'
@@ -51,6 +52,14 @@ const eventsScreenStack = StackNavigator(
             screen: AddEventScreen,
             navigationOptions: ({navigation}) => ({
                 title: 'Add Event',
+                headerRight: rightIcon(navigation, 'home'),
+                headerLeft: leftIcon(navigation, 'bars')
+            })
+        },
+        DetailEvent: {
+            screen: DetailEventScreen,
+            navigationOptions: ({navigation}) => ({
+                title: 'Detail Event',
                 headerRight: rightIcon(navigation, 'home'),
                 headerLeft: leftIcon(navigation, 'bars')
             })

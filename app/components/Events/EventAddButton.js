@@ -24,6 +24,6 @@ const styles = StyleSheet.create({
     buttonContainer: {
         position: 'absolute',
         alignSelf: 'flex-end',
-        bottom: 0
+        bottom: 20
     }
 })
