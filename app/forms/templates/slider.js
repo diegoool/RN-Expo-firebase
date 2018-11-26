@@ -12,12 +12,12 @@ export default sliderTemplate = (locals) => {
            {locals.label} ({parseInt(locals.value)})
            </Text>
            <Slider
-            ref='input'
-            step={locals.config.step}
-            minimumValue={locals.config.min}
-            maximumValue={locals.config.max}
-            value={parseInt(locals.value)}
-            onValueChange={value => locals.onChange(value)}
+                ref='input'
+                step={locals.config.step}
+                minimumValue={locals.config.min}
+                maximumValue={locals.config.max}
+                value={parseInt(locals.value)}
+                onValueChange={value => locals.onChange(value)}
             />
             {help}
        </View>

@@ -51,7 +51,7 @@ export default class Events extends Component {
     eventDetails (event) {
         const navigateAction = NavigationActions.navigate({
             routeName: 'DetailEvent',
-            params: { event: event}
+            params: {event: event}
         });
         this.props.navigation.dispatch(navigateAction);
     }

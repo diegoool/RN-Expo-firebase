@@ -7,7 +7,7 @@ export default class EventRating extends Component {
     constructor(props){
         super(props);
         this.state = {
-            rating= 0
+            rating: 0
         };
         const {eventId} = props;
         this.commentsRef = firebase.database().ref(`comments/${eventId}`);
@@ -35,24 +35,15 @@ export default class EventRating extends Component {
 
     render() {
         const {rating} = this.state;
-
-        if(rating){
-            return (
-                <View>
-                    <Rating
-                        ref='rating'
-                        imageSize={20}
-                        readonly
-                        startingValue={rating}
-                    />
-                </View>
-            )
-        } else {
-            return (
-                <View>
-                    <Text>No rating.</Text>
-                </View>
-            )
-        }
+        return (
+            <View>
+                <Rating
+                    ref='rating'
+                    imageSize={20}
+                    readonly
+                    startingValue={rating}
+                />
+            </View>
+        )
     }
 }
