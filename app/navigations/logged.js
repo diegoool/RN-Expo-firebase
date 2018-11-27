@@ -5,6 +5,8 @@ import DetailEventScreen from '../screens/Events/DetailEvent'
 import EditEventScreen from '../screens/Events/EditEvent'
 import LogoutScreen from '../screens/Logout'
 
+import ProfileScreen from '../screens/Profile'
+
 import {DrawerNavigator, StackNavigator} from 'react-navigation'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
@@ -61,14 +63,29 @@ const eventsScreenStack = StackNavigator(
             screen: DetailEventScreen,
             navigationOptions: ({navigation}) => ({
                 title: 'Detail Event',
-                headerRight: rightIcon(navigation, 'home'),
-                headerLeft: leftIcon(navigation, 'bars')
+                headerLeft: leftIcon(navigation, 'bars'),
+                headerRight: rightIcon(navigation, 'home')
             })
         },
         EditEvent: {
             screen: EditEventScreen,
             navigationOptions: ({navigation}) => ({
                 title: 'Edit Event',
+                headerRight: rightIcon(navigation, 'home')
+            })
+        }
+    },
+    navigationOptions
+);
+
+const profileScreenStack = StackNavigator(
+    {
+        ProfileScreen: {
+            screen: ProfileScreen,
+            navigationOptions: ({navigation}) => ({
+                title: 'Profile',
+                drawerIcon: ({tintColor}) => (<Icon name='user' size={24} style={{ color: tintColor}} />),
+                headerLeft: leftIcon(navigation, 'bars'),
                 headerRight: rightIcon(navigation, 'home')
             })
         }
@@ -88,10 +105,13 @@ const logoutScreenStack = StackNavigator({
 
 export default DrawerNavigator(
     {
-        EventsScreen:{
+        EventsScreen: {
             screen: eventsScreenStack
         },
-        LogoutScreen:{
+        ProfileScreen: {
+            screen: profileScreenStack
+        },
+        LogoutScreen: {
             screen: logoutScreenStack
         }
     },
