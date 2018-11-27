@@ -54,6 +54,7 @@ export default class CommentList extends Component {
                     <FlatList
                         data={comments}
                         renderItem={(data) => this.renderComments(data.item)}
+                        keyExtractor={(data) => data.id}
                     />
                 </Card>
             </View>

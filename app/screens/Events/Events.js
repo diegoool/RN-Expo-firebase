@@ -94,6 +94,7 @@ export default class Events extends Component {
                 <FlatList
                     data={events}
                     renderItem={(data) => this.renderEvent(data.item)}
+                    keyExtractor={(data) => data.id}
                 />
                 <EventAddButton addEvent={this.addEvent.bind(this)} />
             </BackgroundImg>
