@@ -1,6 +1,7 @@
 /node_modules
 /assets/images/**/*
 node_modules/**/*
+/utils/constants
 .expo/*
 npm-debug.*
 *.jks

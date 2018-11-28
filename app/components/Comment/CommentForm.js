@@ -5,8 +5,10 @@ import t from 'tcomb-form-native'
 const Form = t.form.Form
 import {Card} from 'react-native-elements'
 import { View } from 'react-native'
-import * as firebase from 'firebase'
 import Toast from 'react-native-easy-toast'
+
+import firebase from '../../utils/firebase'
+const database = firebase.database();
 
 export default class CommentForm extends Component {
     constructor(){
@@ -24,7 +26,7 @@ export default class CommentForm extends Component {
         if(validate){
             let data = {};
             let comment = Object.assign({}, validate);
-            let ref = firebase.database().ref().child('comments');
+            let ref = database.ref().child('comments');
             const key = ref.push().key;
 
             data[`${this.props.eventId}/${key}`] = comment;

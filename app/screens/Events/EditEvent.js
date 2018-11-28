@@ -2,13 +2,15 @@ import React, { Component } from 'react'
 import BackgroundImg from '../../components/BackgroundImg'
 import AppButton from '../../components/AppButton'
 import { StyleSheet, View } from 'react-native'
-import * as firebase from 'firebase';
 import { options, Event } from '../../forms/event'
 import t from 'tcomb-form-native';
 import {Card} from 'react-native-elements';
 const Form = t.form.Form;
 import Toast from 'react-native-easy-toast';
 import { NavigationActions } from 'react-navigation';
+
+import firebase from '../../utils/firebase'
+const database = firebase.database();
 
 export default class EditEvent extends Component {
 
@@ -25,7 +27,7 @@ export default class EditEvent extends Component {
         const validate = this.refs.form.getValue();
         if(validate){
             let data = Object.assign({},validate);
-            const ref = firebase.database().ref().child(`events/${this.state.event.id}`);
+            const ref = database.ref().child(`events/${this.state.event.id}`);
             ref.update(data)
             .then(()=>{
                 const navigateAction = NavigationActions.navigate({

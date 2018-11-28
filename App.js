@@ -1,9 +1,8 @@
 import React from 'react';
 import PreLoader from './app/components/PreLoader';
 // Firebase
-import firebaseConfig from './app/utils/firebase';
-import * as firebase from 'firebase';
-firebase.initializeApp(firebaseConfig)
+import firebase from './app/utils/firebase';
+const auth = firebase.auth();
 
 import GuestNavigation from './app/navigations/guest';
 import LoggedNavigation from './app/navigations/logged';
@@ -22,7 +21,7 @@ export default class App extends React.Component {
   }
 
   async componentDidMount (){
-    await firebase.auth().onAuthStateChanged((user) => {
+    await auth.onAuthStateChanged((user) => {
       if(user !== null) {
         this.setState({
           isLogged: true,

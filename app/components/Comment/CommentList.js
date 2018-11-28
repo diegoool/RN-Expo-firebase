@@ -3,9 +3,11 @@ import PreLoader from "../PreLoader"
 import BackgroundImg from "../BackgroundImg"
 import { View, StyleSheet, FlatList } from 'react-native'
 import { Card, Divider, Text } from 'react-native-elements'
-import * as firebase from 'firebase'
 import NoComments from './NoComments'
 import Comment from './Comment'
+
+import firebase from '../../utils/firebase'
+const database = firebase.database();
 
 export default class CommentList extends Component {
 
@@ -18,7 +20,7 @@ export default class CommentList extends Component {
     }
 
     componentDidMount(){
-        firebase.database().ref(`comments/${this.props.eventId}`).on('value', snapshot => {
+        database.ref(`comments/${this.props.eventId}`).on('value', snapshot => {
             let comments = [];
             snapshot.forEach(row => {
                 comments.push({

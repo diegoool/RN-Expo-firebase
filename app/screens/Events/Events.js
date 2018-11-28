@@ -3,10 +3,12 @@ import BackgroundImg from '../../components/BackgroundImg'
 import PreLoader from '../../components/PreLoader'
 import { StyleSheet, FlatList } from 'react-native'
 import { ListItem } from 'react-native-elements'
-import * as firebase from 'firebase';
 import { NavigationActions } from 'react-navigation'
 import NoEvents from '../../components/Events/NoEvents'
 import EventAddButton from '../../components/Events/EventAddButton'
+
+import firebase from '../../utils/firebase'
+const database = firebase.database();
 
 export default class Events extends Component {
     constructor(){
@@ -18,7 +20,7 @@ export default class Events extends Component {
             logo_event: require('../../../assets/images/logo_event.png')
         };
 
-        this.refEvents = firebase.database().ref().child('events');
+        this.refEvents = database.ref().child('events');
     }
 
     componentDidMount(){
