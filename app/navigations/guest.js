@@ -4,6 +4,8 @@ import StartScreen from '../screens/Start';
 import LoginScreen from '../screens/Login';
 import RegisterScreen from '../screens/Register';
 
+import {color} from '../themes/theme'
+
 export default StackNavigator(
     {
         Start: {
@@ -20,13 +22,14 @@ export default StackNavigator(
         initialRouteName: 'Start',
         navigationOptions: {
             headerStyle: {
-                backgroundColor: '#f4511e'
+                backgroundColor: color.primaryColor,
+                borderBottomWidth: 0
             },
             headerTitleStyle: {
                 textAlign: 'center',
                 alignSelf: 'center',
                 fontSize: 20,
-                color: '#fff',
+                color: color.dark,
                 fontWeight: 'bold'
             }
         }

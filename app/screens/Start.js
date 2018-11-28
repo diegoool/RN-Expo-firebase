@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View} from 'react-native';
+import {View, Image} from 'react-native';
 import BackgroundImg from '../components/BackgroundImg';
 import AppButton from '../components/AppButton';
 import { NavigationActions } from 'react-navigation';
@@ -11,7 +11,7 @@ import facebook from '../utils/fb';
 export default class Start extends Component  {
 
     static navigationOptions ={
-        title: 'Woo App'
+        title: 'VÄLKOMMEN'
     }
 
     login(){
