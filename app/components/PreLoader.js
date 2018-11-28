@@ -1,14 +1,18 @@
 import React, { Component } from 'react'
 import { ActivityIndicator, View, StyleSheet, Dimensions } from 'react-native'
+import BackgroundImg from './BackgroundImg'
 
-const {height} = Dimensions.get('window') // Tomar la altura del dispositivo
+const {height} = Dimensions.get('window').height // Tomar la altura del dispositivo
 
 export default class PreLoader extends Component {
     render(){
         return(
-            <View style={[styles.preloader]}>
-                <ActivityIndicator style={{height:80}} size="large" />
-            </View>
+            <BackgroundImg 
+                source={require('../../assets/splash.png')}
+                style={[styles.preloader]}
+            >
+                <ActivityIndicator style={{height:80, color: '#fff'}} size="large" />
+            </BackgroundImg>
         )
     }
 }
@@ -20,6 +24,6 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
         height: height,
-        backgroundColor: 'lightblue'
+        backgroundColor: '#4353FF'
     }
 })
