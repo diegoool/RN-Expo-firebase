@@ -74,7 +74,7 @@ export default class Start extends Component  {
                     </Text>
                     <View style={{height: 70, flexDirection: 'row'}} >
                         <AppButton
-                            bgColor='rgba(240, 163, 16, 0.7)'
+                            bgColor='rgba(226, 72, 55, 0.7)'
                             title='Register'
                             action={this.register.bind(this)}
                             iconName='user-plus'

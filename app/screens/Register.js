@@ -97,12 +97,12 @@ export default class Register extends Component {
                         value={this.state.user}
                     />
                     <AppButton
-                    bgColor='rgba(60, 208, 156, 0.7)'
-                    title='Skapa'
-                    action={this.register.bind(this)}
-                    iconName='user-plus'
-                    iconSize={30}
-                    iconColor='white'            
+                        bgColor='rgba(226, 72, 55, 0.7)'
+                        title='Skapa'
+                        action={this.register.bind(this)}
+                        iconName='user-plus'
+                        iconSize={30}
+                        iconColor='white'            
                     />
                 </Card>
             </View>

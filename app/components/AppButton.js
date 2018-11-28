@@ -27,11 +27,11 @@ const styles = StyleSheet.create({
     
     buttonStyle: {
         padding: 10,
-        height: 45,
+        height: 40,
         borderColor: 'transparent',
         borderWidth: 0,
-        borderRadius: 5,
-        marginBottom: 5,
+        borderRadius: 30,
+        marginBottom: 30,
         width: width
     }
 })
