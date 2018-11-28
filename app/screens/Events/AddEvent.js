@@ -2,12 +2,14 @@ import React, {Component} from 'react';
 import BackgroundImg from '../../components/BackgroundImg';
 import AppButton from '../../components/AppButton';
 import {View, StyleSheet} from 'react-native';
-import * as firebase from 'firebase';
 import {options, Event} from '../../forms/event'
 import t from 'tcomb-form-native';
 import {Card} from 'react-native-elements';
 const Form = t.form.Form;
 import Toast from 'react-native-easy-toast';
+
+import firebase from '../../utils/firebase'
+const database = firebase.database();
 
 export default class AddEvent extends Component {
     constructor (){
@@ -27,10 +29,10 @@ export default class AddEvent extends Component {
         const validate = this.refs.form.getValue();
         if(validate){
             let data = {};
-            const key = firebase.database().ref().child('events').push().key;
+            const key = database.ref().child('events').push().key;
             // validate es = a decir this.state.event
             data[`events/${key}`] = this.state.event;
-            firebase.database().ref().update(data)
+            database.ref().update(data)
             .then(()=>{
                 this.refs.toast.show('Event published!', 800);
                 this.props.navigation.navigate('ListEvents');

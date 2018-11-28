@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import {Rating, Text} from 'react-native-elements';
-import * as firebase from 'firebase';
 import { View } from 'react-native';
+
+import firebase from '../../utils/firebase'
+const database = firebase.database();
+
 
 export default class EventRating extends Component {
     constructor(props){
@@ -10,7 +13,7 @@ export default class EventRating extends Component {
             rating: 0
         };
         const {eventId} = props;
-        this.commentsRef = firebase.database().ref(`comments/${eventId}`);
+        this.commentsRef = database.ref(`comments/${eventId}`);
     }
 
     componentDidMount(){
