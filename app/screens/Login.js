@@ -17,8 +17,8 @@ export default class Login extends Component{
         super();
 
         this.user = t.struct({
-            epost: formValidation.email,
-            lösenord: formValidation.password
+            email: formValidation.email,
+            password: formValidation.password
         });
 
         this.state = {
@@ -27,12 +27,12 @@ export default class Login extends Component{
 
         this.options = {
             fields: {
-                epost: {
+                email: {
                     help: 'Skriv in din epost',
                     error: 'Felaktig epost',
                     autoCapitalize: 'none'
                 },
-                lösenord:{
+                password:{
                     help: 'Skriv in ditt lösenord',
                     error: 'Fel lösenord',
                     password: true,

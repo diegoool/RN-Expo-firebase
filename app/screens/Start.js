@@ -55,7 +55,7 @@ export default class Start extends Component  {
     render(){
         return(
         <BackgroundImg source={require('../../assets/images/img2.png')} style={{alignItems:'stretch', flex:1}}>
-                <Image source={require('../../assets/title.png')} style={{alignSelf:'center'}}/>
+                <Image source={require('../../assets/title.png')} style={{alignSelf:'center', marginBottom : 30}}/>
                 <Card containerStyle={styles.container}>
                 <Text style={{marginBottom: 20, textAlign: 'center', fontSize: 24, fontWeight:'bold', color: 'white'}} h1>Välkommen</Text>
                     <View style={{justifyContent:'center', flexDirection: 'column', alignContent: 'flex-end',}}>

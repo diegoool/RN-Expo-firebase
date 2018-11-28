@@ -16,8 +16,8 @@ export default class Register extends Component {
 
         this.state= {
             user: {
-                epost: '',
-                lösenord: ''
+                email: '',
+                password: ''
             }
         }
 
@@ -26,19 +26,19 @@ export default class Register extends Component {
         })
 
         this.user = t.struct({
-            epost: formValidation.email,
-            lösenord: formValidation.password,
+            email: formValidation.email,
+            password: formValidation.password,
             password_confirmation: this.samePassword
         });
 
         this.options = {
             fields: {
-                epost: {
+                email: {
                     help: 'Skriv in din epost',
                     error: 'Felaktig epost',
                     autoCapitalize: 'none'
                 },
-                lösenord:{
+                password:{
                     help: 'Skriv in ditt lösenord',
                     error: 'Minst sex (6) tecken',
                     password: true,
