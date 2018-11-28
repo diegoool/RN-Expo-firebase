@@ -17,8 +17,8 @@ export default class Login extends Component{
         super();
 
         this.user = t.struct({
-            email: formValidation.email,
-            password: formValidation.password
+            epost: formValidation.email,
+            lösenord: formValidation.password
         });
 
         this.state = {
@@ -27,14 +27,14 @@ export default class Login extends Component{
 
         this.options = {
             fields: {
-                email: {
-                    help: 'introduce tu email',
-                    error: 'Email incorrecto',
+                epost: {
+                    help: 'Skriv in din epost',
+                    error: 'Felaktig epost',
                     autoCapitalize: 'none'
                 },
-                password:{
-                    help: 'introduce tu password',
-                    error: 'Password incorrecto',
+                lösenord:{
+                    help: 'Skriv in ditt lösenord',
+                    error: 'Fel lösenord',
                     password: true,
                     secureTextEntry: true
                 }
@@ -47,16 +47,16 @@ export default class Login extends Component{
         if (validate) {
             firebase.auth().signInWithEmailAndPassword(validate.email, validate.password)
             .then(()=>{
-                this.refs.toast.show('Welcome!', 800);
+                this.refs.toast.show('Välkommen!', 800);
             })
             .catch((error)=> {
                 const errorCode = error.code;
                 const errorMessage = error.message;
 
                 if (errorCode === 'auth/wrong-password'){
-                    this.refs.toast.show('Incorrect Password', 800);
+                    this.refs.toast.show('Fel Password', 800);
                 } else if (errorCode === 'auth/email-already-in-use'){
-                    this.refs.toast.show('This email is already registered.', 800);
+                    this.refs.toast.show('Epost är redan registrerad.', 800);
                 } else {
                     this.refs.toast.show(errorMessage, 800);
                 }
@@ -68,9 +68,9 @@ export default class Login extends Component{
     render (){
 
         return(
-            <BackgroundImg source={require('../../assets/images/img1.png')}>
+            <BackgroundImg source={require('../../assets/images/img2.png')}>
             <View>
-                <Card wrapperStyle={{paddingLeft: 10, paddingRight: 10}} title="Iniciar Sesion" >
+                <Card wrapperStyle={{paddingLeft: 10, paddingRight: 10}} title="Logga in" >
                     <Form
                         ref="form"
                         type={this.user}
@@ -78,12 +78,12 @@ export default class Login extends Component{
                     />
                     <AppButton
                     bgColor='rgba(60, 208, 156, 0.7)'
-                    title='Login'
+                    title='Logga in'
                     action={this.login.bind(this)}
                     iconName='sign-in'
                     iconSize={30}
                     iconColor='white'            
-                />
+                    />
                 </Card>
             </View>
             <Toast

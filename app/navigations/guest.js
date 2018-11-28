@@ -9,7 +9,7 @@ import {color} from '../themes/theme'
 export default StackNavigator(
     {
         Start: {
-            screen: StartScreen
+            screen: StartScreen,
         },
         Login: {
             screen: LoginScreen
@@ -29,9 +29,10 @@ export default StackNavigator(
                 textAlign: 'center',
                 alignSelf: 'center',
                 fontSize: 20,
-                color: color.dark,
-                fontWeight: 'bold'
-            }
+                color: 'white',
+                fontWeight: '300',
+            },
+            headerTintColor:'white'
         }
     }
 )

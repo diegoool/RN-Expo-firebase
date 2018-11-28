@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import BackgroundImg from '../components/BackgroundImg';
 import AppButton from '../components/AppButton';
 import t from 'tcomb-form-native';
@@ -16,8 +16,8 @@ export default class Register extends Component {
 
         this.state= {
             user: {
-                email: '',
-                password: ''
+                epost: '',
+                lösenord: ''
             }
         }
 
@@ -26,27 +26,27 @@ export default class Register extends Component {
         })
 
         this.user = t.struct({
-            email: formValidation.email,
-            password: formValidation.password,
+            epost: formValidation.email,
+            lösenord: formValidation.password,
             password_confirmation: this.samePassword
         });
 
         this.options = {
             fields: {
-                email: {
-                    help: 'introduce tu email',
-                    error: 'Email incorrecto',
+                epost: {
+                    help: 'Skriv in din epost',
+                    error: 'Felaktig epost',
                     autoCapitalize: 'none'
                 },
-                password:{
-                    help: 'introduce tu password',
-                    error: 'Password incorrecto',
+                lösenord:{
+                    help: 'Skriv in ditt lösenord',
+                    error: 'Minst sex (6) tecken',
                     password: true,
                     secureTextEntry: true
                 },
                 password_confirmation:{
-                    help: 'Repite tu password',
-                    error: 'Password no coincide',
+                    help: 'Bekräfta lösenord',
+                    error: 'Lösenordet matchar inte',
                     password: true,
                     secureTextEntry: true
                 }
@@ -70,7 +70,7 @@ export default class Register extends Component {
                 const errorMessage = error.message;
 
                 if (errorCode === 'auth/email-already-in-use'){
-                    this.refs.toast.show('This email is already registered.', 800);
+                    this.refs.toast.show('Denna epostadress är redan registrerad.', 800);
                 } else {
                     this.refs.toast.show(errorMessage, 800);  
                 }     
@@ -86,9 +86,9 @@ export default class Register extends Component {
 
   render() {
     return (
-        <BackgroundImg  source={require('../../assets/images/img3.png')} >
+        <BackgroundImg source={require('../../assets/images/img2.png')} >
             <View>
-            <Card wrapperStyle={{paddingLeft: 10, paddingRight: 10}} title="Registrate" >
+            <Card wrapperStyle={styles.container} title="Skapa ett konto" >
                     <Form
                         ref="form"
                         type={this.user}
@@ -98,7 +98,7 @@ export default class Register extends Component {
                     />
                     <AppButton
                     bgColor='rgba(60, 208, 156, 0.7)'
-                    title='Registrarme'
+                    title='Skapa'
                     action={this.register.bind(this)}
                     iconName='user-plus'
                     iconSize={30}
@@ -120,3 +120,10 @@ export default class Register extends Component {
   }
 }
 
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: 'rgba(255, 255, 255, 0.3)',
+        borderWidth: 0,
+        paddingLeft: 10, paddingRight: 10
+    }
+})
