@@ -6,7 +6,7 @@ import EditEventScreen from '../screens/Events/EditEvent'
 import LogoutScreen from '../screens/Logout'
 import ProfileScreen from '../screens/Profile'
 
-import {DrawerNavigator, StackNavigator} from 'react-navigation'
+import {createDrawerNavigator, createStackNavigator} from 'react-navigation'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 import {color} from '../themes/theme'
@@ -32,7 +32,7 @@ const leftIcon = (navigation, icon) => <Icon
         style={{marginLeft: 20}}
         size={20}
         color='white'
-        onPress={() => navigation.navigate('DrawerOpen')}
+        onPress={() => navigation.openDrawer()}
     />
 
     const rightIcon = (navigation, icon) => <Icon
@@ -43,13 +43,12 @@ const leftIcon = (navigation, icon) => <Icon
         onPress={() => navigation.navigate('ListEvents')}
     />
 
-const eventsScreenStack = StackNavigator(
+const eventsScreenStack = createStackNavigator(
     {
         ListEvents: {
             screen: EventsScreen,
             navigationOptions: ({navigation}) => ({
                 title: 'Events',
-                drawerIcon: ({tintColor}) => (<Icon name='home' size={24} style={{ color: tintColor }} />),
                 headerLeft: leftIcon(navigation, 'bars')
             })
         },
@@ -82,13 +81,12 @@ const eventsScreenStack = StackNavigator(
     navigationOptions
 );
 
-const profileScreenStack = StackNavigator(
+const profileScreenStack = createStackNavigator(
     {
         ProfileScreen: {
             screen: ProfileScreen,
             navigationOptions: ({navigation}) => ({
                 title: 'Profile',
-                drawerIcon: ({tintColor}) => (<Icon name='user' size={24} style={{ color: tintColor }} />),
                 headerLeft: leftIcon(navigation, 'bars'),
                 headerRight: rightIcon(navigation, 'home')
             })
@@ -97,26 +95,37 @@ const profileScreenStack = StackNavigator(
     navigationOptions
 );
 
-const logoutScreenStack = StackNavigator({
+const logoutScreenStack = createStackNavigator({
     LogoutScreen: {
         screen: LogoutScreen,
         navigationOptions: ({navigation}) => ({
-            title: 'Logout',
-            drawerIcon: ({tintColor}) => (<Icon name='sign-out' size={24} style={{ color: tintColor }} />)
+            title: 'Logout'
         })
     }
 });
 
-export default DrawerNavigator(
+export default createDrawerNavigator(
     {
         EventsScreen: {
-            screen: eventsScreenStack
+            screen: eventsScreenStack,
+            navigationOptions: {
+                drawerLabel: 'Events',
+                drawerIcon:({tintColor}) => (<Icon name='home' size={24} style={{ color: tintColor }} />)
+            }
         },
         ProfileScreen: {
-            screen: profileScreenStack
+            screen: profileScreenStack,
+            navigationOptions: {
+                drawerLabel: 'Profile',
+                drawerIcon: ({tintColor}) => (<Icon name='user' size={24} style={{ color: tintColor }} />),
+            }
         },
         LogoutScreen: {
-            screen: logoutScreenStack
+            screen: logoutScreenStack,
+            navigationOptions: {
+                drawerLabel: 'Logout',
+                drawerIcon: ({tintColor}) => (<Icon name='sign-out' size={24} style={{ color: tintColor }} />)
+            }
         }
     },
     {
