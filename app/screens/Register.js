@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import BackgroundImg from '../components/BackgroundImg';
 import AppButton from '../components/AppButton';
 import t from 'tcomb-form-native';
@@ -34,19 +34,19 @@ export default class Register extends Component {
         this.options = {
             fields: {
                 email: {
-                    help: 'introduce tu email',
-                    error: 'Email incorrecto',
+                    help: 'Skriv in din epost',
+                    error: 'Felaktig epost',
                     autoCapitalize: 'none'
                 },
                 password:{
-                    help: 'introduce tu password',
-                    error: 'Password incorrecto',
+                    help: 'Skriv in ditt lösenord',
+                    error: 'Minst sex (6) tecken',
                     password: true,
                     secureTextEntry: true
                 },
                 password_confirmation:{
-                    help: 'Repite tu password',
-                    error: 'Password no coincide',
+                    help: 'Bekräfta lösenord',
+                    error: 'Lösenordet matchar inte',
                     password: true,
                     secureTextEntry: true
                 }
@@ -70,7 +70,7 @@ export default class Register extends Component {
                 const errorMessage = error.message;
 
                 if (errorCode === 'auth/email-already-in-use'){
-                    this.refs.toast.show('This email is already registered.', 800);
+                    this.refs.toast.show('Denna epostadress är redan registrerad.', 800);
                 } else {
                     this.refs.toast.show(errorMessage, 800);  
                 }     
@@ -86,9 +86,9 @@ export default class Register extends Component {
 
   render() {
     return (
-        <BackgroundImg  source={require('../../assets/images/img3.png')} >
+        <BackgroundImg source={require('../../assets/images/img2.png')} >
             <View>
-            <Card wrapperStyle={{paddingLeft: 10, paddingRight: 10}} title="Registrate" >
+            <Card wrapperStyle={styles.container} title="Skapa ett konto" >
                     <Form
                         ref="form"
                         type={this.user}
@@ -97,12 +97,12 @@ export default class Register extends Component {
                         value={this.state.user}
                     />
                     <AppButton
-                    bgColor='rgba(60, 208, 156, 0.7)'
-                    title='Registrarme'
-                    action={this.register.bind(this)}
-                    iconName='user-plus'
-                    iconSize={30}
-                    iconColor='white'            
+                        bgColor='rgba(226, 72, 55, 0.7)'
+                        title='Skapa'
+                        action={this.register.bind(this)}
+                        iconName='user-plus'
+                        iconSize={30}
+                        iconColor='white'            
                     />
                 </Card>
             </View>
@@ -120,3 +120,10 @@ export default class Register extends Component {
   }
 }
 
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: 'rgba(255, 255, 255, 0.3)',
+        borderWidth: 0,
+        paddingLeft: 10, paddingRight: 10
+    }
+})

@@ -4,16 +4,18 @@ import AddEventScreen from '../screens/Events/AddEvent'
 import DetailEventScreen from '../screens/Events/DetailEvent'
 import EditEventScreen from '../screens/Events/EditEvent'
 import LogoutScreen from '../screens/Logout'
-
 import ProfileScreen from '../screens/Profile'
 
 import {DrawerNavigator, StackNavigator} from 'react-navigation'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
+import {color} from '../themes/theme'
+
 const navigationOptions = {
     navigationOptions: {
         headerStyle: {
-            backgroundColor: 'rgba(200, 38, 74, 1)'
+            backgroundColor: color.primaryColor,
+            borderBottomWidth: 0
         },
         headerTitleStyle: {
             textAlign: 'center',
@@ -47,7 +49,7 @@ const eventsScreenStack = StackNavigator(
             screen: EventsScreen,
             navigationOptions: ({navigation}) => ({
                 title: 'Events',
-                drawerIcon: ({tintColor}) => (<Icon name='home' size={24} style={{ color: tintColor}} />),
+                drawerIcon: ({tintColor}) => (<Icon name='home' size={24} style={{ color: tintColor }} />),
                 headerLeft: leftIcon(navigation, 'bars')
             })
         },
@@ -64,14 +66,16 @@ const eventsScreenStack = StackNavigator(
             navigationOptions: ({navigation}) => ({
                 title: 'Detail Event',
                 headerLeft: leftIcon(navigation, 'bars'),
-                headerRight: rightIcon(navigation, 'home')
+                headerRight: rightIcon(navigation, 'home'),
+                headerBackTitle: null
             })
         },
         EditEvent: {
             screen: EditEventScreen,
             navigationOptions: ({navigation}) => ({
                 title: 'Edit Event',
-                headerRight: rightIcon(navigation, 'home')
+                headerRight: rightIcon(navigation, 'home'),
+                headerTintColor: 'white'
             })
         }
     },
@@ -84,7 +88,7 @@ const profileScreenStack = StackNavigator(
             screen: ProfileScreen,
             navigationOptions: ({navigation}) => ({
                 title: 'Profile',
-                drawerIcon: ({tintColor}) => (<Icon name='user' size={24} style={{ color: tintColor}} />),
+                drawerIcon: ({tintColor}) => (<Icon name='user' size={24} style={{ color: tintColor }} />),
                 headerLeft: leftIcon(navigation, 'bars'),
                 headerRight: rightIcon(navigation, 'home')
             })
@@ -98,7 +102,7 @@ const logoutScreenStack = StackNavigator({
         screen: LogoutScreen,
         navigationOptions: ({navigation}) => ({
             title: 'Logout',
-            drawerIcon: ({tintColor}) => (<Icon name='sign-out' size={24} style={{ color: tintColor}} />)
+            drawerIcon: ({tintColor}) => (<Icon name='sign-out' size={24} style={{ color: tintColor }} />)
         })
     }
 });
@@ -116,11 +120,13 @@ export default DrawerNavigator(
         }
     },
     {
-        drawerBackgroundColor: 'rgba(128, 35, 60, 0.7)',
+        drawerBackgroundColor: color.primaryColor,
         contentOptions:{
-            activeTintColor: 'white',
-            activeBackgroundColor: 'transparent' ,
+            color: 'white',
+            activeTintColor: color.secondaryColor,
             inactiveTintColor: 'white',
+            tintColor: 'white',
+            activeBackgroundColor: 'transparent' ,
             itemsContainerStyle : {
                 marginVertical: 0
             }

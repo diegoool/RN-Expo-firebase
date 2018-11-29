@@ -20,7 +20,7 @@ export default class Event extends Component {
 
 				<AppButton
 					bgColor="rgba(255, 38, 74, 0.8)"
-					title="Editar Evente"
+					title="Edit Event"
 					action={editEvent}
 					iconName="pencil"
 					iconSize={30}
@@ -29,7 +29,7 @@ export default class Event extends Component {
 
 				<AppButton
 					bgColor="rgba(28, 25, 21, 0.7)"
-					title="Volver"
+					title="Go Back"
 					action={goHome}
 					iconName="arrow-left"
 					iconSize={30}
