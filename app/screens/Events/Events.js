@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import BackgroundImg from '../../components/BackgroundImg'
 import PreLoader from '../../components/PreLoader'
 import { StyleSheet, FlatList } from 'react-native'
-import { ListItem } from 'react-native-elements'
+import { ListItem, SearchBar } from 'react-native-elements'
 import { NavigationActions } from 'react-navigation'
 import NoEvents from '../../components/Events/NoEvents'
 import EventAddButton from '../../components/Events/EventAddButton'
@@ -17,13 +17,26 @@ export default class Events extends Component {
         this.state = {
             events: [],
             loaded: false,
-            logo_event: require('../../../assets/images/logo_event.png')
+            logo_event: require('../../../assets/images/logo_event.png'),
+            search: ''
         };
 
-        this.refEvents = database.ref().child('events');
+    }
+    
+    componentDidMount(){
+        const {search} = this.state;
+        
+        if (!search){
+            this.refEvents = database.ref().child('events');
+        } else {
+            this._filterEvents(search)
+        }
+
+        this._loadFirebaseEvents();
+        
     }
 
-    componentDidMount(){
+    _loadFirebaseEvents (){
         this.refEvents.on('value', snapshot => {
             let events = [];
             snapshot.forEach(row => {
@@ -41,6 +54,7 @@ export default class Events extends Component {
                 loaded: true
             });
         })
+
     }
 
     addEvent () {
@@ -72,19 +86,67 @@ export default class Events extends Component {
         )
 
     }
+
+    searchEvents (search){
+        this.setState({
+            search: search.charAt(0).toUpperCase() + search.slice(1)
+        });
+        
+        if(search.length >= 3){
+            this._filterEvents(search);
+            setTimeout(() => {
+                this._loadFirebaseEvents();
+            }, 800);
+        } else if (search.length == 0) {
+            this.resetSearch();
+        }
+    }
+   
+    resetSearch (){
+        this.setState({
+            search: ''
+        });
+        this.refEvents = database.ref().child('events');
+        setTimeout(() => {
+            this._loadFirebaseEvents();
+        }, 800);
+    }
+
+    _filterEvents (search) {
+        this.refEvents = database.ref().child('events')
+            .orderByChild('name')
+            .startAt(search)
+            .endAt(`${search}\uf8ff`);
+    }
    
     render() {
         const { loaded, events } = this.state;
         
+        const searchBar = (
+            <SearchBar
+                platform="ios"
+                showLoading
+                cancelIcon={{ type: 'font-awesome', name: 'chevron-left' }}
+                placeholder='Sök event...'
+                onChangeText={(text)=> this.searchEvents(text)}
+                onClear={this.resetSearch.bind(this)}
+                value={this.state.search}
+            />
+        )
+
         if(!loaded){
             return (
+            <BackgroundImg source={require('../../../assets/images/img3.png')}>
+            {searchBar}
             <PreLoader />
+            </BackgroundImg>
             )
         }
 
         if(!events.length){
             return (
             <BackgroundImg source={require('../../../assets/images/img3.png')}>
+                {searchBar}
                 <NoEvents text='No events' />
                 <EventAddButton addEvent={this.addEvent.bind(this)} />
             </BackgroundImg>
@@ -93,6 +155,7 @@ export default class Events extends Component {
         
         return (
             <BackgroundImg source={require('../../../assets/images/img3.png')}>
+                {searchBar}
                 <FlatList
                     data={events}
                     renderItem={(data) => this.renderEvent(data.item)}
