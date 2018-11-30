@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import BackgroundImg from '../../components/BackgroundImg';
 import AppButton from '../../components/AppButton';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, ScrollView} from 'react-native';
 import {options, Event} from '../../forms/event'
 import t from 'tcomb-form-native';
 import {Card} from 'react-native-elements';
@@ -17,8 +17,12 @@ export default class AddEvent extends Component {
         this.state = {
             event: {
                 name: '',
+                city: '',
                 address: '',
+                date: '',
+                time: '',
                 capacity: 0,
+                tickets: 0,
                 description: ''
             }
         };
@@ -51,6 +55,7 @@ export default class AddEvent extends Component {
         return (
             <BackgroundImg source={require('../../../assets/images/img3.png')}>
             <View style={styles.container}>
+            <ScrollView>
                 <Card title='Event Form'>
                     <View>
                         <Form
@@ -70,6 +75,7 @@ export default class AddEvent extends Component {
                         iconColor='white'            
                     />
                 </Card>
+                </ScrollView>
             </View>
             <Toast
                 ref="toast"

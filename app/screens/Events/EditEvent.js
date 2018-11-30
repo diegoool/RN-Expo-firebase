@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import BackgroundImg from '../../components/BackgroundImg'
 import AppButton from '../../components/AppButton'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, ScrollView } from 'react-native'
 import { options, Event } from '../../forms/event'
 import t from 'tcomb-form-native';
 import {Card} from 'react-native-elements';
@@ -50,6 +50,7 @@ export default class EditEvent extends Component {
         const {event} = this.state;
         return (
             <BackgroundImg  source={require('../../../assets/images/img3.png')} >
+            <ScrollView>
                 <View style={styles.container}>
                     <Card title="Edit Event" >
                         <View>
@@ -72,6 +73,8 @@ export default class EditEvent extends Component {
                     </Card>
 
                 </View>
+
+            </ScrollView>
             </BackgroundImg>
         );
     }

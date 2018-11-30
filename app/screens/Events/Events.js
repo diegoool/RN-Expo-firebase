@@ -43,8 +43,12 @@ export default class Events extends Component {
                 events.push({
                     id: row.key,
                     name: row.val().name,
+                    city: row.val().city,
                     address: row.val().address,
+                    date: row.val().date,
+                    time: row.val().time,
                     capacity: row.val().capacity,
+                    tickets: row.val().tickets,
                     description: row.val().description
                 })
             });
